@@ -6,7 +6,6 @@ A RESTful API for handling authentication and user management, designed for easy
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
-- [Running with Docker](#running-with-docker)
 - [API Endpoints](#api-endpoints)
   - [User Registration](#user-registration)
   - [User Login](#user-login)
