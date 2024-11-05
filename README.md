@@ -33,13 +33,16 @@ Ensure you have the following installed:
 2. **Install dependencies**:
 
 3. **Set up environment variables**:
-   - Copy the sample environment file and edit it with your database credentials and other secrets.
+   - Create a Venv and install the requriments.
    ```bash
-   cp config/.env.example config/.env
+   python -m venv venv
+   .\venv\Scripts\Activate.ps1
+   pip install -r requirements.txt
    ```
-   - Modify `config/.env` as necessary.
-
 4. **Run the server**:
+```
+pyhton manage.py runserver
+```
    
 
 The server should now be running on `http://localhost:8000` by default.
