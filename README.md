@@ -1,7 +1,3 @@
-# auth-api
- Session-Based Auth REST API  This project is a RESTful API service implementing session- based authentication for user sign-up, login, authorization, and token management. The API is built with Django providing secure and scalable user authentication and authorization functionalities.  Features:  User Sign-Up: Create a new user with a secure hashed password.  User Login: Authenticate users and generate tokens.  Token-Based Authorization: Protect endpoints by validating tokens for authenticated access.  Token Revocation: Allow users to logout and revoke tokens to prevent reuse.  Token Refresh: Enable token renewal to keep sessions active without re-login.  Error Handling: Return appropriate status codes and messages for different failure cases.   Technologies: Django for backend logic  Session based authentication for token-based security Mongodb for data storage (configurable)     Project Setup  1. Clone the repository and set up your environment.    2. Use provided curl commands in the README to test each endpoint (sign-up, login, token-protected route access, logout, refresh).    Testing  Unit tests are included to verify authentication flows, available in the tests/ directory.  This repository demonstrates essential practices in building secure, token-based authentication systems, making it ideal for developers learning backend security concepts or building scalable APIs. 
-Features:  User Sign-Up: Create a new user with a secure hashed password.  User Login: Authenticate users and generate tokens.  Token-Based Authorization: Protect endpoints by validating tokens for authenticated access.  Token Revocation: Allow users to logout and revoke tokens to prevent reuse.  Token Refresh: Enable token renewal to keep sessions active without re-login.  Error Handling: Return appropriate status codes and messages for different failure cases.   Technologies: Django for backend logic  Session based authentication for token-based security Mongodb for data storage (configurable) .
-Project Setup  1. Clone the repository and set up your environment.    2. Use provided curl commands in the README to test each endpoint (sign-up, login, token-protected route access, logout, refresh).    Testing Unit tests are included to verify authentication flows, available in the tests/ directory.  
 
 # Auth API Documentation
 
@@ -98,3 +94,35 @@ curl --location 'http://127.0.0.1:8000/api/profile/' \
 ### Notes
 - Replace `<access_token>` in each command with the actual token obtained from the login response.
 - Ensure each endpoint requiring authorization includes the correct bearer token.
+
+# Auth API
+
+## Session-Based Auth REST API
+
+This project is a RESTful API service implementing session-based authentication for user sign-up, login, authorization, and token management. The API is built with Django, providing secure and scalable user authentication and authorization functionalities.
+
+### Features
+
+- **User Sign-Up**: Create a new user with a secure hashed password.
+- **User Login**: Authenticate users and generate tokens.
+- **Token-Based Authorization**: Protect endpoints by validating tokens for authenticated access.
+- **Token Revocation**: Allow users to log out and revoke tokens to prevent reuse.
+- **Token Refresh**: Enable token renewal to keep sessions active without re-login.
+- **Error Handling**: Return appropriate status codes and messages for different failure cases.
+
+### Technologies
+
+- **Django**: For backend logic.
+- **Session-Based Authentication**: For token-based security.
+- **MongoDB**: For data storage (configurable).
+
+### Project Setup
+
+1. Clone the repository and set up your environment.
+2. Use the provided `curl` commands in the README to test each endpoint (sign-up, login, token-protected route access, logout, refresh).
+
+### Testing
+
+Unit tests are included to verify authentication flows and are available in the `tests/` directory.
+
+This repository demonstrates essential practices in building secure, token-based authentication systems, making it ideal for developers learning backend security concepts or building scalable APIs.
