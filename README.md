@@ -26,20 +26,19 @@ Ensure you have the following installed:
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
-   cd auth-api-main
+   git clone https://github.com/abhay-2789/auth-api.git
+   cd auth-api
    ```
 
-2. **Install dependencies**:
-
-3. **Set up environment variables**:
+2. **Set up environment variables**:
    - Create a Venv and install the requriments.
    ```bash
    python -m venv venv
    .\venv\Scripts\Activate.ps1
    pip install -r requirements.txt
    ```
-4. **Run the server**:
+   
+3. **Run the server**:
 ```
 pyhton manage.py runserver
 ```
