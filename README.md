@@ -19,9 +19,8 @@ A RESTful API for handling authentication and user management, designed for easy
 ## Prerequisites
 
 Ensure you have the following installed:
-- **Node.js** (v14+)
-- **npm** (v6+)
-- **Docker** (for running with Docker)
+- **Pyhton** 
+- **Django** 
 - **Postman** (optional, for testing API endpoints)
 
 ## Getting Started
@@ -33,9 +32,6 @@ Ensure you have the following installed:
    ```
 
 2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
 
 3. **Set up environment variables**:
    - Copy the sample environment file and edit it with your database credentials and other secrets.
@@ -45,23 +41,9 @@ Ensure you have the following installed:
    - Modify `config/.env` as necessary.
 
 4. **Run the server**:
-   ```bash
-   npm start
-   ```
+   
 
-The server should now be running on `http://localhost:3000` by default.
-
-## Running with Docker
-
-1. **Build and start the Docker containers**:
-   ```bash
-   docker-compose up --build
-   ```
-
-2. **Check that the service is running**:
-   Access `http://localhost:3000` (or the specified Docker port) in your browser or through API testing tools.
-
----
+The server should now be running on `http://localhost:8000` by default.
 
 ## API Endpoints
 
@@ -110,7 +92,7 @@ curl -X GET http://localhost:3000/api/profile   -H "Authorization: Bearer <token
 
 ## Configuration
 
-- **Port**: The default port is `3000`. To change, update `config/.env`.
+- **Port**: The default port is `8000`. To change, update `config/.env`.
 - **Database**: Configure the database in `config/.env` with `DB_HOST`, `DB_USER`, `DB_PASS`, and `DB_NAME`.
 
 ---
