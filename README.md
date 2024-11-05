@@ -1,128 +1,134 @@
 
-# Auth API Documentation
+# Auth API
 
-This API allows users to perform authentication actions, including registering, logging in, logging out, logging out from all sessions, and retrieving profile information. Each endpoint can be tested using `curl` commands as described below.
+A RESTful API for handling authentication and user management, designed for easy integration and deployment. This guide provides step-by-step instructions for setting up the project locally and using Docker, along with sample `curl` commands to test the API.
 
-## Requirements
-
-Ensure the API server is running on `http://127.0.0.1:8000` before making these requests.
-
-## Endpoints and Usage
-
-### 1. Register a New User
-
-This endpoint registers a new user by providing their email and password. Both `password` and `password2` should match.
-
-```bash
-curl --location 'http://127.0.0.1:8000/api/register/' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "email": "abhay1@gmail.com",
-    "password": "12345678",
-    "password2": "12345678"
-}'
-```
-
-**Parameters:**
-- `email`: The user's email address.
-- `password`: The user’s password.
-- `password2`: Confirmation of the password (must match `password`).
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Running with Docker](#running-with-docker)
+- [API Endpoints](#api-endpoints)
+  - [User Registration](#user-registration)
+  - [User Login](#user-login)
+  - [Profile Information](#profile-information)
+- [Example Curl Commands](#example-curl-commands)
+- [Configuration](#configuration)
 
 ---
+
+## Prerequisites
+
+Ensure you have the following installed:
+- **Node.js** (v14+)
+- **npm** (v6+)
+- **Docker** (for running with Docker)
+- **Postman** (optional, for testing API endpoints)
+
+## Getting Started
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd auth-api-main
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**:
+   - Copy the sample environment file and edit it with your database credentials and other secrets.
+   ```bash
+   cp config/.env.example config/.env
+   ```
+   - Modify `config/.env` as necessary.
+
+4. **Run the server**:
+   ```bash
+   npm start
+   ```
+
+The server should now be running on `http://localhost:3000` by default.
+
+## Running with Docker
+
+1. **Build and start the Docker containers**:
+   ```bash
+   docker-compose up --build
+   ```
+
+2. **Check that the service is running**:
+   Access `http://localhost:3000` (or the specified Docker port) in your browser or through API testing tools.
+
+---
+
+## API Endpoints
+
+### 1. User Registration
+- **URL**: `/api/register`
+- **Method**: `POST`
+- **Body**: 
+  - `username` (string)
+  - `email` (string)
+  - `password` (string)
 
 ### 2. User Login
+- **URL**: `/api/login`
+- **Method**: `POST`
+- **Body**:
+  - `email` (string)
+  - `password` (string)
 
-This endpoint logs in an existing user, returning an access token for authenticated actions.
-
-```bash
-curl --location 'http://127.0.0.1:8000/api/auth/login/' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "email": "abhay1@gmail.com",
-    "password": "12345678"
-}'
-```
-
-**Parameters:**
-- `email`: The registered email of the user.
-- `password`: The user’s password.
+### 3. Profile Information
+- **URL**: `/api/profile`
+- **Method**: `GET`
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
 
 ---
 
-### 3. User Logout
+## Example Curl Commands
 
-This endpoint logs out the current session, invalidating the access token.
-
+### Register a New User
 ```bash
-curl --location --request POST 'http://127.0.0.1:8000/api/logout/' \
---header 'Authorization: Bearer <access_token>'
+curl -X POST http://localhost:3000/api/register   -H "Content-Type: application/json"   -d '{"username": "newuser", "email": "newuser@example.com", "password": "password123"}'
 ```
 
-**Headers:**
-- `Authorization`: The access token obtained from the login request, formatted as `Bearer <access_token>`.
+### Log in as a User
+```bash
+curl -X POST http://localhost:3000/api/login   -H "Content-Type: application/json"   -d '{"email": "newuser@example.com", "password": "password123"}'
+```
+
+### Access User Profile (Requires Token)
+Replace `<token>` with the JWT token received from the login endpoint.
+```bash
+curl -X GET http://localhost:3000/api/profile   -H "Authorization: Bearer <token>"
+```
 
 ---
 
-### 4. Logout from All Sessions
+## Configuration
 
-This endpoint logs out the user from all active sessions by invalidating all tokens associated with the account.
-
-```bash
-curl --location --request POST 'http://127.0.0.1:8000/api/logoutall/' \
---header 'Authorization: Bearer <access_token>'
-```
-
-**Headers:**
-- `Authorization`: The access token obtained from the login request, formatted as `Bearer <access_token>`.
+- **Port**: The default port is `3000`. To change, update `config/.env`.
+- **Database**: Configure the database in `config/.env` with `DB_HOST`, `DB_USER`, `DB_PASS`, and `DB_NAME`.
 
 ---
 
-### 5. Retrieve User Profile
+## Troubleshooting
 
-This endpoint retrieves the authenticated user's profile information.
+1. **Common Errors**: 
+   - If you encounter database connection issues, ensure your database credentials in `config/.env` are correct.
+2. **Docker Issues**:
+   - If using Docker, make sure Docker and Docker Compose are installed and running.
 
-```bash
-curl --location 'http://127.0.0.1:8000/api/profile/' \
---header 'Authorization: Bearer <access_token>'
-```
-
-**Headers:**
-- `Authorization`: The access token obtained from the login request, formatted as `Bearer <access_token>`.
+For further questions or issues, please open an issue on the GitHub repository.
 
 ---
 
 ### Notes
-- Replace `<access_token>` in each command with the actual token obtained from the login response.
-- Ensure each endpoint requiring authorization includes the correct bearer token.
+- Remember to secure your environment variables and never push sensitive information to public repositories.
 
-# Auth API
+---
 
-## Session-Based Auth REST API
-
-This project is a RESTful API service implementing session-based authentication for user sign-up, login, authorization, and token management. The API is built with Django, providing secure and scalable user authentication and authorization functionalities.
-
-### Features
-
-- **User Sign-Up**: Create a new user with a secure hashed password.
-- **User Login**: Authenticate users and generate tokens.
-- **Token-Based Authorization**: Protect endpoints by validating tokens for authenticated access.
-- **Token Revocation**: Allow users to log out and revoke tokens to prevent reuse.
-- **Token Refresh**: Enable token renewal to keep sessions active without re-login.
-- **Error Handling**: Return appropriate status codes and messages for different failure cases.
-
-### Technologies
-
-- **Django**: For backend logic.
-- **Session-Based Authentication**: For token-based security.
-- **MongoDB**: For data storage (configurable).
-
-### Project Setup
-
-1. Clone the repository and set up your environment.
-2. Use the provided `curl` commands in the README to test each endpoint (sign-up, login, token-protected route access, logout, refresh).
-
-### Testing
-
-Unit tests are included to verify authentication flows and are available in the `tests/` directory.
-
-This repository demonstrates essential practices in building secure, token-based authentication systems, making it ideal for developers learning backend security concepts or building scalable APIs.
+Happy Coding!
