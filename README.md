@@ -89,24 +89,8 @@ Replace `<token>` with the JWT token received from the login endpoint.
 curl -X GET http://localhost:3000/api/profile   -H "Authorization: Bearer <token>"
 ```
 
----
 
-## Configuration
 
-- **Port**: The default port is `8000`. To change, update `config/.env`.
-- **Database**: Configure the database in `config/.env` with `DB_HOST`, `DB_USER`, `DB_PASS`, and `DB_NAME`.
 
----
-
-## Troubleshooting
-
-1. **Common Errors**: 
-   - If you encounter database connection issues, ensure your database credentials in `config/.env` are correct.
-2. **Docker Issues**:
-   - If using Docker, make sure Docker and Docker Compose are installed and running.
-
-For further questions or issues, please open an issue on the GitHub repository.
-
----
 
 
