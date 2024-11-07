@@ -109,9 +109,4 @@ For further questions or issues, please open an issue on the GitHub repository.
 
 ---
 
-### Notes
-- Remember to secure your environment variables and never push sensitive information to public repositories.
 
----
-
-Happy Coding!
